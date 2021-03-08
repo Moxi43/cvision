@@ -18,9 +18,14 @@ bool equal_arrays(int array1[3], int array2[3]) {
     return false;
 }
 
-int main() {
-    std::ifstream file1{ "left1.txt" };
-    std::ifstream file2{ "left2.txt" };
+int nums1[180][180][3];
+int nums2[180][180][3];
+
+int nnn;
+void preprocessing_arrays(nnn) {
+
+    std::ifstream file1{ "frame1.txt" };
+    std::ifstream file2{ "frame2.txt" };
     std::vector<int> array1;
     std::vector<int> array2;
 
@@ -35,12 +40,9 @@ int main() {
         array2.emplace_back(num2);
     }
 
-    int nums1[64][64][3];
-    int nums2[64][64][3];
-
     int ii = 0;
-    for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 64; j++) {
+    for (int i = 0; i < nnn; i++) {
+        for (int j = 0; j < nnn; j++) {
             for (int k = 0; k < 3; k++) {
                 nums1[i][j][k] = array1[ii];
                 ii += 1;
@@ -49,8 +51,8 @@ int main() {
         }
 
     int iii = 0;
-    for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 64; j++) {
+    for (int i = 0; i < nnn; i++) {
+        for (int j = 0; j < nnn; j++) {
             for (int k = 0; k < 3; k++) {
                 nums2[i][j][k] = array2[iii];
                 iii += 1;
@@ -58,15 +60,45 @@ int main() {
             }
         }
 
-    std::cout << nums1[56][0][0];
+}
+
+
+int main() {
+    preprocessing_arrays(180);
+    bool is_ns = else;
 
     int common_pixels = 0;
-
-    for(int i = 0; i < 64; i++)
-    if (equal_arrays(nums1[56][0], nums2[56][i])) {
-        common_pixels += 1;
+    for (i = 0; i < 50; i++) {
+        if(equal_arrays(nums1[0][0], nums2[i][0])) {
+            common_pixels += 1;
+        }
+    }
+    if (common_pixels > 40) {
+        bool is_ns = true;
     }
 
-    if (common_pixels > 0) { std::cout << "LEFT\n" << common_pixels;}
+
+    if(is_ns) {
+        int common_pixels_up = 0;
+
+        for(int i = 30; i < 60; i++) {
+            if (equal_arrays(nums1[60][30], nums2[60][i])) {
+                common_pixels_up += 1;
+            }
+        }
+        if (common_pixels_up > 0) { std::cout << "UP\n" << common_pixels_up;}
+        else if (common_pixels_up < 0) { std::cout << "DOWN" << common_pixels_up;}
+
+    } else {
+        int common_pixels_left = 0;
+
+        for(int i = 5; i < 30; i++) {
+            if (equal_arrays(nums1[30][5], nums2[30][i])) {
+                common_pixels_left += 1;
+            }
+        }
+        if (common_pixels_left > 0) { std::cout << "LEFT\n" << common_pixels_left;}
+        else if (common_pixels_left < 0) { std::cout << "RIGHT\n" << common_pixels_left;}
+    }
 
 }
